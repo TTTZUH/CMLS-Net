@@ -1,0 +1,66 @@
+# Configuration for ISPRS Vaihingen Dataset
+
+# Dataset settings
+dataset:
+  name: 'vaihingen'
+  root_dir: '/path/to/vaihingen'  # Update this path
+  num_classes: 6
+  class_names: ['Impervious surfaces', 'Building', 'Low vegetation', 'Tree', 'Car', 'Clutter']
+  ignore_index: 255
+  image_size: 256
+
+# Model settings
+model:
+  name: 'cmls_net_large'
+  backbone_config: 'W40'
+  mvfe_groups: 10
+  csft_heads: 8
+  csft_window: 4
+
+# Training settings
+training:
+  batch_size: 16
+  num_epochs: 100
+  num_workers: 4
+  pin_memory: true
+  
+  optimizer:
+    type: 'adamw'
+    lr: 0.0001
+    weight_decay: 0.0001
+    betas: [0.9, 0.999]
+  
+  scheduler:
+    type: 'polynomial'
+    power: 0.9
+    min_lr: 0.000001
+    warmup_epochs: 5
+    warmup_lr: 0.00001
+  
+  loss:
+    type: 'combined'
+    dice_weight: 1.0
+    class_weights: null
+  
+  augmentation:
+    level: 'normal'
+  
+  use_amp: true
+  clip_grad: 1.0
+  
+  save_dir: './checkpoints/vaihingen'
+  log_dir: './logs/vaihingen'
+  save_interval: 10
+  eval_interval: 1
+  
+  resume: null
+  pretrained: null
+
+# Evaluation settings
+evaluation:
+  batch_size: 8
+  num_workers: 4
+
+# Device settings
+device: 'cuda'
+seed: 42

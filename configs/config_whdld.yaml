@@ -1,0 +1,82 @@
+# Configuration for WHDLD Dataset
+
+# Dataset settings
+dataset:
+  name: 'whdld'
+  root_dir: '/path/to/whdld'  # Update this path
+  num_classes: 6
+  class_names: ['Bare soil', 'Building', 'Pavement', 'Vegetation', 'Road', 'Water']
+  ignore_index: 255
+  image_size: 256
+
+# Data split ratios (train:val:test)
+data_split:
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+
+# Model settings
+model:
+  name: 'cmls_net_large'  # Options: cmls_net_tiny, cmls_net_small, cmls_net_large
+  backbone_config: 'W40'
+  mvfe_groups: 10
+  csft_heads: 8
+  csft_window: 4
+
+# Training settings
+training:
+  batch_size: 16
+  num_epochs: 100
+  num_workers: 4
+  pin_memory: true
+  
+  # Optimizer
+  optimizer:
+    type: 'adamw'  # Options: adam, adamw, sgd
+    lr: 0.0001
+    weight_decay: 0.0001
+    betas: [0.9, 0.999]
+    momentum: 0.9  # For SGD
+  
+  # Learning rate scheduler
+  scheduler:
+    type: 'polynomial'  # Options: polynomial, cosine, step, multistep
+    power: 0.9
+    min_lr: 0.000001
+    warmup_epochs: 5
+    warmup_lr: 0.00001
+  
+  # Loss function
+  loss:
+    type: 'combined'  # Options: ce, dice, combined, focal
+    dice_weight: 1.0
+    class_weights: null  # Can be a list of weights for each class
+  
+  # Data augmentation
+  augmentation:
+    level: 'normal'  # Options: light, normal, strong
+  
+  # Mixed precision training
+  use_amp: true
+  
+  # Gradient clipping
+  clip_grad: 1.0
+  
+  # Save and logging
+  save_dir: './checkpoints/whdld'
+  log_dir: './logs/whdld'
+  save_interval: 10  # Save checkpoint every N epochs
+  eval_interval: 1   # Evaluate every N epochs
+  
+  # Resume training
+  resume: null  # Path to checkpoint to resume from
+  pretrained: null  # Path to pretrained weights
+
+# Evaluation settings
+evaluation:
+  batch_size: 8
+  num_workers: 4
+
+# Device settings
+device: 'cuda'  # Options: cuda, cpu
+seed: 42
