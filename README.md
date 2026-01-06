@@ -169,18 +169,6 @@ training:
 | CMLS-S | 9 | 4 | 4 | Balanced accuracy and speed |
 | CMLS-L | 10 | 8 | 4 | Best accuracy, sufficient resources |
 
-## 📝 Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@article{cmls_net_2025,
-  title={Collaborative Multi-Level Semantic Network for Remote Sensing Image Segmentation via Progressive Feature Refinement},
-  author={Your Name},
-  journal={arXiv preprint},
-  year={2025}
-}
-```
 
 ## 📄 License
 
@@ -192,12 +180,5 @@ This project is released under the MIT License.
 - Albumentations for data augmentation
 - PyTorch team for the deep learning framework
 
-## 📧 Contact
-
-For questions and feedback:
-- Email: your.email@example.com
-- Issues: https://github.com/yourusername/CMLS-Net/issues
-
----
 
 **Note**: This is a research implementation. For production use, please ensure thorough testing and validation.
